@@ -1,73 +1,54 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# HOME ASSIGNMENT - REFLECTIZ
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+The system was built using Nest.js,Typescript, express.js and mongoDB, have several different services.
+First: contains 2 routes, the other one searches for a domain by its name, while the second one creates a new domain in the system.
+Second: runs scheduled, every 30 seconde on all records to get up-to-date information.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Routes structure
 
-## Description
+##### POST /domain
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+    {
+      "name": "testdomain.com"
+    }
 
-## Installation
+Returns information about a domain testdomain.com. If it does not exist, the object will be added to the DB and at a later stage will be scanned.
 
-```bash
-$ npm install
-```
+##### POST /domain/analysis
 
-## Running the app
+    {
+        "name": "testdomain.com"
+    }
 
-```bash
-# development
-$ npm run start
+Adds the domain to the DB for a scan analyze. if it already exists in the DB we will return an message the domain already exist.
 
-# watch mode
-$ npm run start:dev
+##### Example request:
 
-# production mode
-$ npm run start:prod
-```
+    POST http://localhost:3000/api/domains
+    {
+        "name": "testdomain.com"
+    }
 
-## Test
+## scheduled
 
-```bash
-# unit tests
-$ npm run test
+Every 30 seconds we will pull the records from DB whose whoIs and virusTotal are null (new records) and update them.
 
-# e2e tests
-$ npm run test:e2e
+## How to run it
 
-# test coverage
-$ npm run test:cov
-```
+First, you need to import the code using git clone, then go to the current project and create .env file.
+Before running, it is important to check that there are env values in the .env file.
+for example:
 
-## Support
+###### .env
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+    WHO_IS_URL="https://www.whoisxmlapi.com/whoisserver/WhoisService"
+    WHO_IS_API_KEY=your-api-key
 
-## Stay in touch
+    TOTAL_VIRUS_URL="https://www.virustotal.com/api/v3/domains"
+    TOTAL_VIRUS_API_KEY=your-api-key
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+    MONGO_DB_URI="mongodb://mongodb:27017/domains"
 
-## License
+Once you've got all the values for your .env file, you can run the code using docker:
 
-Nest is [MIT licensed](LICENSE).
+    docker-compose up -d --build
