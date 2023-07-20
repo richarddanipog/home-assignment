@@ -60,5 +60,3 @@ export class DomainsService {
     return this.domainModel.find({ isAnalyzed: false }).exec();
   }
 }
-
-//** TODO: add status-running,pending,finish, test all flow. prepare docker and try run on docker-compose*/
