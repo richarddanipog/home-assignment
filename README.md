@@ -4,7 +4,11 @@ The system was built using Nest.js,Typescript, express.js and mongoDB, have seve
 First: contains 2 routes, the other one searches for a domain by its name, while the second one creates a new domain in the system.
 Second: runs scheduled, every 30 seconde on all records to get up-to-date information.
 
-## Routes structure
+## scheduled
+
+Every 30 seconds we will pull the records from DB whose isAnalyzed are false (new records) and update them.
+
+## Routes
 
 ##### POST /domain
 
@@ -28,10 +32,9 @@ Adds the domain to the DB for a scan analyze. if it already exists in the DB we 
     {
         "name": "testdomain.com"
     }
-
-## scheduled
-
-Every 30 seconds we will pull the records from DB whose whoIs and virusTotal are null (new records) and update them.
+    basic auth
+        user:admin
+        password:123456
 
 ## How to run it
 
@@ -48,6 +51,9 @@ for example:
     TOTAL_VIRUS_API_KEY=your-api-key
 
     MONGO_DB_URI="mongodb://mongodb:27017/domains"
+
+    BASIC_AUTH_USER=admin
+    BASIC_AUTH_PASSWORD=123456
 
 Once you've got all the values for your .env file, you can run the code using docker:
 
