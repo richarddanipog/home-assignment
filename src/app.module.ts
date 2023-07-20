@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DomainsModule } from './domains/domains.module';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -22,7 +21,6 @@ import { PassportModule } from '@nestjs/passport';
     ScheduleModule.forRoot(),
     SchedulerModule,
   ],
-  controllers: [AppController],
   providers: [AppService, BasicAuthStrategy],
 })
 export class AppModule {}
