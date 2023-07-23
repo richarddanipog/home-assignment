@@ -1,8 +1,8 @@
 # HOME ASSIGNMENT - REFLECTIZ
 
-The system was built using Nest.js,Typescript, express.js and mongoDB, have several different services.
+The system was built using Nest.js, Typescript, and MongoDB, which have several different services.
 First: contains 2 routes, the other one searches for a domain by its name, while the second one creates a new domain in the system.
-Second: runs scheduled, every 30 seconde on all records to get up-to-date information.
+Second: runs scheduled, every 30 seconds on all records to get up-to-date information.
 
 ## scheduled
 
@@ -24,7 +24,7 @@ Returns information about a domain testdomain.com. If it does not exist, the obj
         "name": "testdomain.com"
     }
 
-Adds the domain to the DB for a scan analyze. if it already exists in the DB we will return an message the domain already exist.
+Adds the domain to the DB for a scan analysis. if it already exists in the DB we will return a message the domain already exists.
 
 ##### Example request:
 
@@ -33,12 +33,12 @@ Adds the domain to the DB for a scan analyze. if it already exists in the DB we 
         "name": "testdomain.com"
     }
     basic auth
-        user:admin
+        user: admin
         password:123456
 
 ## How to run it
 
-First, you need to import the code using git clone, then go to the current project and create .env file.
+First, you need to import the code using git clone, then go to the current project and create a .env file.
 Before running, it is important to check that there are env values in the .env file.
 for example:
 
