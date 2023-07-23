@@ -10,7 +10,7 @@ Every 30 seconds we will pull the records from DB whose isAnalyzed are false (ne
 
 ## Routes
 
-##### POST /domain
+##### POST /api/domains
 
     {
       "name": "testdomain.com"
@@ -18,7 +18,7 @@ Every 30 seconds we will pull the records from DB whose isAnalyzed are false (ne
 
 Returns information about a domain testdomain.com. If it does not exist, the object will be added to the DB and at a later stage will be scanned.
 
-##### POST /domain/analysis
+##### POST /api/domains/analysis
 
     {
         "name": "testdomain.com"
@@ -30,11 +30,12 @@ Adds the domain to the DB for a scan analysis. if it already exists in the DB we
 
     POST http://localhost:3000/api/domains
     {
-        "name": "testdomain.com"
+        "name": "youtube.com"
     }
+    
     basic auth
         user: admin
-        password:123456
+        password: 123456
 
 ## How to run it
 
