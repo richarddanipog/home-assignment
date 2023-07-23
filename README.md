@@ -55,6 +55,8 @@ for example:
     BASIC_AUTH_USER=admin
     BASIC_AUTH_PASSWORD=123456
 
+** If you don't have Virus Total apiKey or WhoIs apiKey, contact me and I will send you your mine.
+
 Once you've got all the values for your .env file, you can run the code using docker:
 
     docker-compose up -d --build
