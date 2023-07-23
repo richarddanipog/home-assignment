@@ -47,8 +47,8 @@ for example:
     WHO_IS_URL="https://www.whoisxmlapi.com/whoisserver/WhoisService"
     WHO_IS_API_KEY=your-api-key
 
-    TOTAL_VIRUS_URL="https://www.virustotal.com/api/v3/domains"
-    TOTAL_VIRUS_API_KEY=your-api-key
+    VIRUS_TOTAL_URL="https://www.virustotal.com/api/v3/domains"
+    VIRUS_TOTAL_API_KEY=your-api-key
 
     MONGO_DB_URI="mongodb://mongodb:27017/domains"
 
